@@ -9,10 +9,10 @@ import java.util.List;
 @Mapper
 public interface EmpMapper {
 
-    public List<Emp> selectAll();
-    public Emp selectByEmpno(int empno);
-    public void insert(Emp emp);
-    public void update(int empno,Emp emp);
-    public void delete(int empno);
+    List<Emp> selectAll();
+    Emp selectByEmpno(int empno);
+    void insert(Emp emp);
+    void update(Emp emp);
+    void delete(int empno);
 
 }

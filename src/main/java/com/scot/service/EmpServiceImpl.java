@@ -22,11 +22,6 @@ public class EmpServiceImpl implements EmpService{
     }
 
     @Override
-    public Emp selectByEmpno(int empno) {
-        return mapper.selectByEmpno(empno);
-    }
-
-    @Override
     public void insert(Emp emp) {
         mapper.insert(emp);
     }
@@ -35,10 +30,14 @@ public class EmpServiceImpl implements EmpService{
     public void update(int empno, Emp emp) {
         Emp emp1 = mapper.selectByEmpno(empno);
         if(emp1 != null) {
+            emp1.setEmpno(emp.getEmpno());
+
             emp1.setEname(emp.getEname());
             emp1.setJob(emp.getJob());
-            mapper.update(empno,emp);
+
+            mapper.update(emp);
         } else {
+            throw new IllegalStateException("회원이 존재하지 않습니다.");
         }
     }
 
@@ -47,6 +46,7 @@ public class EmpServiceImpl implements EmpService{
         if(mapper.selectByEmpno(empno) != null) {
             mapper.delete(empno);
         } else {
+            throw new IllegalStateException("회원이 존재하지 않습니다");
         }
     }
 }

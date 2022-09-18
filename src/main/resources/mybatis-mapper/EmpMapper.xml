@@ -16,20 +16,25 @@
         WHERE empno = #{empno}
     </select>
 
-    <insert id="insert" parameterType="Emp">
-        INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO) VALUES(empno_seq.nextval, ${ENAME}, ${JOB}, ${MRG}, sysdate , ${SAL}, ${COMM}, ${DEPTNO});
+    <insert id="insert" parameterType="emp">
+
+        <selectKey keyProperty="empno" resultType="int" order="BEFORE">
+            select EMPNO_SEQ.nextval from dual
+        </selectKey>
+
+        INSERT INTO EMP(empno, ename, job, mgr, hiredate, sal, comm, deptno)
+        VALUES(#{empno}, #{ename}, #{job}, #{mgr}, sysdate, #{sal}, #{comm}, #{deptno})
+
     </insert>
 
     <update id="update" parameterType="Emp">
-        UPDATE EMP
-        SET ename = #{ename},
-            job = #{job}
-        WHERE empno = #{EMPNO}
+        UPDATE EMP SET ename = #{ename},
+                       job = #{job}
+                   WHERE empno = #{empno}
     </update>
 
     <delete id="delete" parameterType="int">
-        DELETE EMP
-		WHERE empno = #{empno}
-    </delete>
+        DELETE EMP WHERE empno = #{empno}
+   </delete>
 
 </mapper>

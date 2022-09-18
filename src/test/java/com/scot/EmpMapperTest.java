@@ -9,16 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
 class EmpMapperTest {
 
-    @Autowired
     private final EmpMapper mapper;
 
     EmpMapperTest(@Autowired EmpMapper mapper) {
@@ -27,12 +24,16 @@ class EmpMapperTest {
 
     @Test
     void selectAll() {
+
         mapper.selectAll();
+
     }
 
     @Test
     void selectByEmpno() {
+
         mapper.selectByEmpno(7369);
+
     }
 
     @Test
@@ -51,10 +52,11 @@ class EmpMapperTest {
     @Test
     void update(Emp emp) {
 
+        emp.setEmpno(30);
         emp.setEname("수정");
         emp.setJob("수정");
 
-        mapper.update(7369,emp);
+        mapper.update(emp);
 
     }
 
